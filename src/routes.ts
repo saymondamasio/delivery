@@ -4,6 +4,7 @@ import { ensureAuthenticateDeliveryman } from './middlewares/ensureAuthenticateD
 import { AuthenticateClientController } from './modules/accounts/useCases/authenticateClient/AuthenticateClientController'
 import { AuthenticateDeliverymanController } from './modules/accounts/useCases/authenticateDeliveryman/AuthenticateDeliverymanController'
 import { CreateClientController } from './modules/clients/useCases/createClient/CreateClientController'
+import { FindAllDeliveriesController } from './modules/clients/useCases/findAllDeliveries/FindAllDeliveriesController'
 import { CreateDeliveryController } from './modules/deliveries/useCases/createDelivery/CreateDeliveryController'
 import { FindAllAvailableController } from './modules/deliveries/useCases/findAllAvailable/FindAllAvailableController'
 import { UpdateDeliverymanController } from './modules/deliveries/useCases/updateDeliveryman/UpdateDeliverymanController'
@@ -19,6 +20,11 @@ routes.post(
   '/delivery',
   ensureAuthenticateClient,
   new CreateDeliveryController().handle
+)
+routes.get(
+  '/clients/my-deliveries',
+  ensureAuthenticateClient,
+  new FindAllDeliveriesController().handle
 )
 routes.put(
   '/deliveries/update-deliveryman/:delivery_id',
