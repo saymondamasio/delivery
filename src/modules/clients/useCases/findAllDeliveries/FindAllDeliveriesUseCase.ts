@@ -6,7 +6,9 @@ export class FindAllDeliveriesUseCase {
       where: {
         id: client_id,
       },
-      include: {
+      select: {
+        username: true,
+        id: true,
         deliveries: true,
       },
     })
