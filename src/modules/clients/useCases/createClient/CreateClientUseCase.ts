@@ -1,5 +1,6 @@
 import { hash } from 'bcrypt'
 import { prisma } from '../../../../database/prismaClient'
+import { AppError } from '../../../../errors/AppError'
 
 interface ICreateClient {
   username: string
@@ -17,7 +18,7 @@ export class CreateClientUseCase {
     })
 
     if (clientExists) {
-      throw new Error('Client already exists')
+      throw new AppError('Client already exists')
     }
 
     const hashPassword = await hash(password, 10)

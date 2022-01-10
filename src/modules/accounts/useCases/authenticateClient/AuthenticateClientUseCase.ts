@@ -1,6 +1,7 @@
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 import { prisma } from '../../../../database/prismaClient'
+import { AppError } from '../../../../errors/AppError'
 
 interface IAuthenticateClient {
   username: string
@@ -16,13 +17,13 @@ export class AuthenticateClientUseCase {
     })
 
     if (!client) {
-      throw new Error('Username or password invalid')
+      throw new AppError('Username or password invalid')
     }
 
     const passwordMatch = await compare(password, client.password)
 
     if (!passwordMatch) {
-      throw new Error('Username or password invalid')
+      throw new AppError('Username or password invalid')
     }
 
     const token = sign({ username }, process.env.JWT_TOKEN!, {
