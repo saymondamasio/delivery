@@ -6,9 +6,11 @@ import { AuthenticateDeliverymanController } from './modules/accounts/useCases/a
 import { CreateClientController } from './modules/clients/useCases/createClient/CreateClientController'
 import { FindAllDeliveriesController } from './modules/clients/useCases/findAllDeliveries/FindAllDeliveriesController'
 import { CreateDeliveryController } from './modules/deliveries/useCases/createDelivery/CreateDeliveryController'
+import { DeliveryCompletedController } from './modules/deliveries/useCases/deliveryCompleted/DeliveryCompletedController'
 import { FindAllAvailableController } from './modules/deliveries/useCases/findAllAvailable/FindAllAvailableController'
 import { UpdateDeliverymanController } from './modules/deliveries/useCases/updateDeliveryman/UpdateDeliverymanController'
 import { CreateDeliverymanController } from './modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanController'
+import { FindAllDeliveriesDeliverymanController } from './modules/deliveryman/useCases/findAllDeliveries/FindAllDeliveriesDeliverymanController'
 
 const routes = Router()
 
@@ -26,10 +28,20 @@ routes.get(
   ensureAuthenticateClient,
   new FindAllDeliveriesController().handle
 )
+routes.get(
+  '/deliveryman/my-deliveries',
+  ensureAuthenticateDeliveryman,
+  new FindAllDeliveriesDeliverymanController().handle
+)
 routes.put(
   '/deliveries/update-deliveryman/:delivery_id',
   ensureAuthenticateDeliveryman,
   new UpdateDeliverymanController().handle
+)
+routes.put(
+  '/deliveries/completed/:delivery_id',
+  ensureAuthenticateDeliveryman,
+  new DeliveryCompletedController().handle
 )
 routes.get(
   '/deliveries/available',
