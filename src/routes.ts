@@ -4,8 +4,8 @@ import { ensureAuthenticateDeliveryman } from './middlewares/ensureAuthenticateD
 import { AuthenticateClientController } from './modules/accounts/useCases/authenticateClient/AuthenticateClientController'
 import { AuthenticateDeliverymanController } from './modules/accounts/useCases/authenticateDeliveryman/AuthenticateDeliverymanController'
 import { CreateClientController } from './modules/clients/useCases/createClient/CreateClientController'
-import { CreateDeliveryController } from './modules/deliveries/createDelivery/CreateDeliveryController'
-import { FindAllAvailableController } from './modules/deliveries/findAllAvailable/FindAllAvailableController'
+import { CreateDeliveryController } from './modules/deliveries/useCases/createDelivery/CreateDeliveryController'
+import { FindAllAvailableController } from './modules/deliveries/useCases/findAllAvailable/FindAllAvailableController'
 import { CreateDeliverymanController } from './modules/deliveryman/useCases/createDeliveryman/CreateDeliverymanController'
 
 const routes = Router()
