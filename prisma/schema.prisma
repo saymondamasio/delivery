@@ -30,10 +30,10 @@ model Clients {
 
 model Deliveries {
   id             String       @id @default(uuid())
-  id_client      String
-  client         Clients      @relation(fields: [id_client], references: [id])
-  id_deliveryman String?
-  deliveryman    Deliveryman? @relation(fields: [id_deliveryman], references: [id])
+  client_id      String
+  client         Clients      @relation(fields: [client_id], references: [id])
+  deliveryman_id String?
+  deliveryman    Deliveryman? @relation(fields: [deliveryman_id], references: [id])
   item_name      String
   created_at     DateTime     @default(now())
   end_at         DateTime?
