@@ -15,6 +15,11 @@ model Deliveryman {
   username String @unique
   password String
 
+  is_available Boolean @default(true)
+
+  position_latitude  Float
+  position_longitude Float
+
   deliveries Delivery[]
   @@map("deliverymen")
 }
@@ -29,14 +34,31 @@ model Client {
 }
 
 model Delivery {
-  id             String       @id @default(uuid())
-  client_id      String
-  client         Client       @relation(fields: [client_id], references: [id])
+  id         String    @id @default(uuid())
+  created_at DateTime  @default(now())
+  end_at     DateTime?
+
+  client_id String
+  client    Client @relation(fields: [client_id], references: [id])
+
   deliveryman_id String?
   deliveryman    Deliveryman? @relation(fields: [deliveryman_id], references: [id])
-  item_name      String
-  created_at     DateTime     @default(now())
-  end_at         DateTime?
 
+  origin_latitude  Float
+  origin_longitude Float
+
+  destination_latitude  Float
+  destination_longitude Float
+
+  item    Item   @relation(fields: [item_id], references: [id])
+  item_id String @unique
   @@map("deliveries")
+}
+
+model Item {
+  id   String @id @default(uuid())
+  name String @unique
+
+  delivery Delivery?
+  @@map("items")
 }
