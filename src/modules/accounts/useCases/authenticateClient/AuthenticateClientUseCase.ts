@@ -10,7 +10,7 @@ interface IAuthenticateClient {
 
 export class AuthenticateClientUseCase {
   async execute({ username, password }: IAuthenticateClient) {
-    const client = await prisma.clients.findFirst({
+    const client = await prisma.client.findFirst({
       where: {
         username,
       },
